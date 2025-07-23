@@ -1,0 +1,221 @@
+body {
+    margin: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    --aspect: calc(1 / 1.414);
+    --height: 80vh;
+    background: linear-gradient(45deg, #f9c4cd 40%, #51afff);
+    overflow: hidden;
+}
+
+svg {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+#card {
+    margin-top: -5vh;
+    transform: rotateX(10deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 2000px;
+    font-family: 'Nanum Pen Script', cursive;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.35vh;
+    line-height: 1.3;
+    transition: transform ease-in-out 1s;
+    /* display: none; */
+}
+
+#card.loaded #insideCover,
+#card.loaded #insideBack,
+#card.loaded #back {
+    display: block;
+}
+
+#card.closed {
+    transform: translateX(-25%);
+}
+
+#frontPage,
+#backPage {
+    height: var(--height);
+    aspect-ratio: var(--aspect);
+    transition: transform ease-in-out 1s;
+}
+
+#frontPage {
+    transform: rotateY(15deg);
+    transform-origin: right;
+    z-index: 1;
+}
+
+#card.flipped #frontPage {
+    z-index: 0;
+}
+
+#backPage {
+    transform: rotateY(-15deg);
+    transform-origin: left;
+}
+
+#cover,
+#back {
+    transform: rotateY(180deg);
+}
+
+#cover,
+#insideBack {
+    background: linear-gradient(
+        270deg,
+        rgba(255, 252, 252, 1) 0%,
+        rgba(252, 250, 240, 1) 98%,
+        rgba(245, 243, 237, 1) 100%
+    );
+}
+
+#back,
+#insideCover {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 252, 252, 1) 0%,
+        rgba(252, 250, 240, 1) 98%,
+        rgba(245, 243, 237, 1) 100%
+    );
+}
+
+#cover,
+#insideBack,
+#back,
+#insideCover {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+#insideBack,
+#back,
+#insideCover {
+    display: none;
+}
+
+p {
+    margin: 1.5vh 8vh;
+}
+
+#card.closed #frontPage {
+    transform: rotateY(164deg);
+}
+
+#cover {
+    animation: close 2s 0s ease-in-out forwards;
+}
+
+#insideCover p:first-child {
+    margin-top: 6vh;
+}
+
+#insideBack p:first-child {
+    margin-top: 12vh;
+}
+
+#insideBack p:last-child {
+    margin-top: 4vh;
+    text-align: right;
+}
+
+#insideCover p:last-child,
+#insideBack p:last-child {
+    margin-bottom: 6vh;
+}
+
+#cover {
+    background-image: url('https://temp-image.com/ib/wdUz2aAKNZlFySe_1753299860.jpg');
+    background-size: contain;
+    /* transition: z-index 0s 1s; */
+}
+
+#card:not(.closed) #cover {
+    animation: open 2s 0s ease-in-out forwards;
+}
+
+@keyframes open {
+    0% {
+        z-index: 1;
+    }
+    50% {
+        z-index: 0;
+    }
+    100% {
+        z-index: 0;
+    }
+}
+
+@keyframes close {
+    0% {
+        z-index: 0;
+    }
+    50% {
+        z-index: 1;
+    }
+    100% {
+        z-index: 1;
+    }
+}
+
+#openBtn {
+    position: absolute;
+    margin: auto;
+    bottom: 2vh;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    text-transform: uppercase;
+    height: 5vh;
+    font-size: 1vh;
+    pointer-events: none;
+    cursor: not-allowed;
+    background-color: grey;
+}
+
+#card.loaded + #openBtn {
+    cursor: pointer;
+    pointer-events: all;
+    background-color: white;
+}
+
+#login {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: rgba(40, 40, 40, 0.3);
+    border-radius: 10px;
+    font-size: larger;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#login input {
+    font-size: larger;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#submitBtn {
+    margin-top: 20px;
+    font-size: larger;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body.logged #login {
+    display: none;
+}
+
+body:not(.logged) #card,
+body:not(.logged) #openBtn {
+    display: none;
+}
