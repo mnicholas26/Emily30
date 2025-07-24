@@ -136,7 +136,7 @@ p {
 }
 
 #cover {
-    background-image: url('https://temp-image.com/ib/wdUz2aAKNZlFySe_1753299860.jpg');
+    background-image: url('./images/bgtest.jpg');
     background-size: contain;
     /* transition: z-index 0s 1s; */
 }
